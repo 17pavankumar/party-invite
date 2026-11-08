@@ -232,10 +232,11 @@
 
 .couple-names {
   font-family: var(--font-script);
-  font-size: clamp(2.4rem, 8.5vw, 4rem);
+  font-size: clamp(2.6rem, 9vw, 4.5rem);
   font-weight: 400;
+  letter-spacing: normal;
   color: var(--color-dark-warm-grey);
-  line-height: 1.15;
+  line-height: 1.25;
   text-shadow: 0 2px 14px rgba(179, 154, 112, 0.12);
   word-break: break-word;
 }
@@ -600,9 +601,10 @@
 }
 
 .signature-names {
-  font-size: clamp(2.3rem, 8vw, 3.8rem);
+  font-size: clamp(2.5rem, 8.5vw, 4.2rem);
   color: var(--color-muted-gold);
-  line-height: 1.2;
+  line-height: 1.25;
+  letter-spacing: normal;
   display: inline-block;
 }
 
@@ -1139,9 +1141,10 @@
 }
 
 .footer-names {
-  font-size: clamp(2.3rem, 8vw, 3.8rem);
+  font-size: clamp(2.5rem, 8.5vw, 4.2rem);
   color: var(--color-dark-warm-grey);
-  line-height: 1.2;
+  line-height: 1.25;
+  letter-spacing: normal;
 }
 
 .footer-subtext {
