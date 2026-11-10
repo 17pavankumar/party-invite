@@ -280,10 +280,17 @@
   flex-direction: column;
   align-items: center;
   gap: 0.85rem;
+  min-height: 165px;
 }
 
 .wax-seal-wrapper {
   margin-bottom: 0.25rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wax-seal-wrapper.seal-unlocked .wax-seal-outer {
+  box-shadow: 0 8px 28px rgba(179, 154, 112, 0.45), 0 0 0 2.5px rgba(179, 154, 112, 0.8);
+  transform: scale(1.03);
 }
 
 .wax-seal-btn {
@@ -359,6 +366,12 @@
 
 .open-invitation-btn {
   margin-top: 0.2rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-opened {
+  background: linear-gradient(135deg, #a88e63 0%, #8e744a 100%);
+  box-shadow: 0 4px 16px rgba(142, 116, 74, 0.32);
 }
 
 .open-invitation-hint {
@@ -366,12 +379,14 @@
   color: var(--color-soft-grey);
   letter-spacing: 0.05em;
   font-style: italic;
+  min-height: 1.2rem;
+  transition: opacity 0.3s ease;
 }
 
 /* Scroll indicator when opened */
 .opened-indicator-wrapper {
-  margin-top: 1rem;
-  animation: fadeIn 0.8s ease forwards;
+  margin-top: 0.5rem;
+  animation: fadeIn 0.6s ease forwards;
 }
 
 .scroll-indicator-link {
@@ -478,31 +493,27 @@
 .revealed-content {
   position: relative;
   z-index: 2;
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .content-hidden {
   opacity: 0;
-  max-height: 0;
-  overflow: hidden;
+  visibility: hidden;
   pointer-events: none;
+  transform: translateY(16px);
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
 }
 
 .content-visible {
   opacity: 1;
-  max-height: none;
-  animation: revealContent 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes revealContent {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  height: auto;
+  overflow: visible;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* --------------------------------------------------------------------------

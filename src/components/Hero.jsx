@@ -8,24 +8,32 @@ export default function Hero({ onOpenInvitation, isOpened }) {
   const { couple, event } = EVENT_DETAILS;
 
   const handleOpenClick = () => {
-    // Subtle, elegant gold confetti burst
-    try {
-      confetti({
-        particleCount: 45,
-        spread: 60,
-        origin: { y: 0.65 },
-        colors: ['#B39A70', '#E8DFD0', '#D4AF37', '#F8F6F0'],
-        ticks: 200,
-        gravity: 0.8,
-        scalar: 0.9,
-        disableForReducedMotion: true,
-      });
-    } catch {
-      // safe fallback if canvas not available
-    }
+    if (!isOpened) {
+      // Subtle, elegant gold confetti burst
+      try {
+        confetti({
+          particleCount: 45,
+          spread: 60,
+          origin: { y: 0.65 },
+          colors: ['#B39A70', '#E8DFD0', '#D4AF37', '#F8F6F0'],
+          ticks: 200,
+          gravity: 0.8,
+          scalar: 0.9,
+          disableForReducedMotion: true,
+        });
+      } catch {
+        // safe fallback if canvas not available
+      }
 
-    if (onOpenInvitation) {
-      onOpenInvitation();
+      if (onOpenInvitation) {
+        onOpenInvitation();
+      }
+    } else {
+      // Already opened: smoothly glide to the invitation content
+      const targetElement = document.getElementById('invitation-message');
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
@@ -64,36 +72,34 @@ export default function Hero({ onOpenInvitation, isOpened }) {
               </div>
             </div>
 
-            {/* Wax Seal & Open Button */}
+            {/* Wax Seal & Open Button - Stable Container (no popping or height shift) */}
             <div className="hero-action-container">
-              {!isOpened ? (
-                <>
-                  <div className="wax-seal-wrapper">
-                    <WaxSeal onClick={handleOpenClick} />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleOpenClick}
-                    className="btn-luxury-primary open-invitation-btn"
-                    aria-label="Open Invitation"
-                  >
+              <div className={`wax-seal-wrapper ${isOpened ? 'seal-unlocked' : ''}`}>
+                <WaxSeal onClick={handleOpenClick} label={isOpened ? "Scroll to invitation" : "Open Invitation"} />
+              </div>
+
+              <button
+                type="button"
+                onClick={handleOpenClick}
+                className={`btn-luxury-primary open-invitation-btn ${isOpened ? 'btn-opened' : ''}`}
+                aria-label={isOpened ? "View Invitation" : "Open Invitation"}
+              >
+                {isOpened ? (
+                  <>
+                    <span>VIEW INVITATION</span>
+                    <ChevronDown size={17} className="btn-icon scroll-arrow-icon" />
+                  </>
+                ) : (
+                  <>
                     <MailOpen size={17} className="btn-icon" />
                     <span>OPEN INVITATION</span>
-                  </button>
-                  <p className="open-invitation-hint">Tap wax seal or button to open</p>
-                </>
-              ) : (
-                <div className="opened-indicator-wrapper">
-                  <a
-                    href="#invitation-message"
-                    className="scroll-indicator-link"
-                    aria-label="Scroll to read invitation"
-                  >
-                    <span className="scroll-text">Scroll to View</span>
-                    <ChevronDown size={20} className="scroll-arrow-icon" />
-                  </a>
-                </div>
-              )}
+                  </>
+                )}
+              </button>
+
+              <p className="open-invitation-hint">
+                {isOpened ? "Invitation opened • Scroll down or tap to view" : "Tap wax seal or button to open"}
+              </p>
             </div>
           </div>
         </div>
@@ -101,4 +107,3 @@ export default function Hero({ onOpenInvitation, isOpened }) {
     </section>
   );
 }
-

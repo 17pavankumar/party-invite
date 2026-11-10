@@ -15,14 +15,6 @@ export default function App() {
 
   const handleOpenInvitation = () => {
     setIsOpened(true);
-
-    // Gently scroll to the invitation content
-    setTimeout(() => {
-      const targetElement = document.getElementById('invitation-message');
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 350);
   };
 
   const handleShare = async () => {
