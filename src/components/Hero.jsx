@@ -8,33 +8,33 @@ export default function Hero({ onOpenInvitation, isOpened }) {
   const { couple, event } = EVENT_DETAILS;
 
   const handleOpenClick = () => {
-    if (!isOpened) {
-      // Subtle, elegant gold confetti burst
-      try {
-        confetti({
-          particleCount: 45,
-          spread: 60,
-          origin: { y: 0.65 },
-          colors: ['#B39A70', '#E8DFD0', '#D4AF37', '#F8F6F0'],
-          ticks: 200,
-          gravity: 0.8,
-          scalar: 0.9,
-          disableForReducedMotion: true,
-        });
-      } catch {
-        // safe fallback if canvas not available
-      }
+    // 1. Trigger the celebration confetti pop-up
+    try {
+      confetti({
+        particleCount: 50,
+        spread: 65,
+        origin: { y: 0.65 },
+        colors: ['#B39A70', '#E8DFD0', '#D4AF37', '#F8F6F0'],
+        ticks: 200,
+        gravity: 0.8,
+        scalar: 0.9,
+        disableForReducedMotion: true,
+      });
+    } catch {
+      // safe fallback if canvas not available
+    }
 
-      if (onOpenInvitation) {
-        onOpenInvitation();
-      }
-    } else {
-      // Already opened: smoothly glide to the invitation content
+    if (!isOpened && onOpenInvitation) {
+      onOpenInvitation();
+    }
+
+    // 2. Right after the pop-up plays (~850ms), smoothly move directly to the 2nd slide!
+    setTimeout(() => {
       const targetElement = document.getElementById('invitation-message');
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }
+    }, isOpened ? 80 : 850);
   };
 
   return (
