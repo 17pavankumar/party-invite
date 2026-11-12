@@ -18,6 +18,11 @@ export const EVENT_DETAILS = {
     // 6 December 2026 6:00 PM IST (UTC+05:30)
     targetDateTimeISO: "2026-12-06T18:00:00+05:30",
   },
+  dressCode: {
+    label: "DRESS CODE",
+    primary: "Semi-Formal • Formal • Indian Festive",
+    description: "Guests are welcome in Semi-Formals, Formals, or Indian Traditional Attire.",
+  },
   invitationMessage: {
     heading: "TOGETHER WITH OUR FAMILIES AND FRIENDS",
     body1: "We warmly invite you to join us for an intimate celebration as we prepare to begin a beautiful new journey.",

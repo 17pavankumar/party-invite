@@ -1,10 +1,10 @@
 import React from 'react';
 import { EVENT_DETAILS } from '../config/eventDetails';
 import { BotanicalDivider } from './Ornament';
-import { Calendar, Clock, MapPin, CalendarPlus } from 'lucide-react';
+import { Calendar, Clock, MapPin, CalendarPlus, Sparkles } from 'lucide-react';
 
 export default function EventDetails() {
-  const { event, venue, calendar } = EVENT_DETAILS;
+  const { event, venue, calendar, dressCode } = EVENT_DETAILS;
 
   const downloadICS = () => {
     // Generate clean .ics file for iOS/macOS/Outlook
@@ -15,7 +15,7 @@ export default function EventDetails() {
       'CALSCALE:GREGORIAN',
       'BEGIN:VEVENT',
       'SUMMARY:Pre-Wedding Celebration of Sahana & Kevin',
-      'DESCRIPTION:An intimate pre-wedding celebration for close friends and family.',
+      'DESCRIPTION:An intimate pre-wedding celebration for close friends and family. Dress code: ' + (dressCode ? dressCode.primary : 'Semi-Formals / Formals / Indian Formals'),
       'LOCATION:' + venue.fullAddress,
       'DTSTART:20261206T123000Z', // 6:00 PM IST is 12:30 PM UTC
       'DTEND:20261206T163000Z',   // 10:00 PM IST is 4:30 PM UTC
@@ -67,7 +67,25 @@ export default function EventDetails() {
             </div>
           </div>
 
-          {/* Card 3: Venue & Address */}
+          {/* Card 3: Dress Code */}
+          {dressCode && (
+            <div className="detail-card detail-card-wide dress-code-card">
+              <div className="detail-icon-wrapper">
+                <Sparkles className="detail-icon" size={22} strokeWidth={1.5} />
+              </div>
+              <div className="detail-content">
+                <span className="detail-label">{dressCode.label}</span>
+                <p className="detail-primary-text dress-code-title">
+                  {dressCode.primary}
+                </p>
+                <p className="detail-secondary-text dress-code-desc">
+                  {dressCode.description}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Card 4: Venue & Address */}
           <div className="detail-card detail-card-wide">
             <div className="detail-icon-wrapper">
               <MapPin className="detail-icon" size={22} strokeWidth={1.5} />
@@ -116,4 +134,3 @@ export default function EventDetails() {
     </section>
   );
 }
-

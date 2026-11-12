@@ -664,6 +664,26 @@
   padding: 2.25rem 2rem;
 }
 
+.dress-code-card {
+  border-color: rgba(179, 154, 112, 0.45);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 246, 240, 0.92) 100%);
+  padding: 2rem 1.75rem;
+}
+
+.dress-code-title {
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  color: var(--color-dark-warm-grey);
+}
+
+.dress-code-desc {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--color-soft-grey);
+  margin-top: 0.35rem;
+  line-height: 1.5;
+}
+
 .detail-icon-wrapper {
   width: 44px;
   height: 44px;
